@@ -3,6 +3,7 @@
   <sound file="bitefaceoff.wav" labels="joke bite face"/>
   <sound file="getinhere.wav" labels="grimpatron"/>
   <sound file="gudelaune.wav" labels="laune"/>
+  <sound file="nomana.wav" labels="tyler tyler1 mana oom"/>
   <sound file="sauce.wav" labels="shaq"/>
   <sound file="tonsdmg.wav" labels="damage phreak"/>
 </sounds>
