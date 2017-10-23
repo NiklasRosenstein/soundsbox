@@ -1,3 +1,9 @@
+# Copyright (c) 2017 Niklas Rosenstein
+"""
+Play sounds to one or more output devices.
+"""
+
+from __future__ import print_function
 
 import argparse
 import atexit
