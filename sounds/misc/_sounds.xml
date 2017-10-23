@@ -1,3 +1,4 @@
 <sounds labels="misc">
   <sound file="sauce.wav" labels="shaq"/>
+  <sound file="tonsdmg.wav" labels="damage phreak"/>
 </sounds>
