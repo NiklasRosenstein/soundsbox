@@ -1,4 +1,4 @@
-<sounds labels="tf tobiasfate">
+<sounds labels="tf tobiasfate" volume="0.1">
   <sound file="2for2deal.wav" labels="good doublekill"/>
   <sound file="cantdoit.wav" labels="bad shout cannot"/>
   <sound file="gongshow.wav" labels="bad excuse"/>

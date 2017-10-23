@@ -24,19 +24,20 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-l', '--list', action='store_true', help='List available input and output devices.')
 parser.add_argument('-d', '--device', help='Output device indices (comma separated).')
 parser.add_argument('-p', '--play', help='Play the specified sound file.')
-parser.add_argument('-v', '--volume', type=float, default=0.05, help='Volume of the played sound.')
+parser.add_argument('-v', '--volume', type=float, default=0.2, help='Volume of the played sound.')
 
 
 class Sound(object):
 
-  def __init__(self, filename, name, labels):
+  def __init__(self, filename, name, labels, volume):
     self.filename = filename
     self.name = name
     self.labels = labels
+    self.volume = volume
 
   def __repr__(self):
-    return 'Sound(filename={!r}, name={!r}, labels={!r})'.format(
-      self.filename, self.name, self.labels)
+    return 'Sound(filename={!r}, name={!r}, labels={!r}, volume={!r})'\
+      .format(self.filename, self.name, self.labels, self.volume)
 
 
 def read_sounds(filename):
@@ -49,6 +50,7 @@ def read_sounds(filename):
     return []
   result = []
   labels = list(filter(bool, sounds.getAttribute('labels').split(' ')))
+  volume = float(sounds.getAttribute('volume') or '1.0')
   for sound in sounds.childNodes:
     if sound.nodeType != sound.ELEMENT_NODE:
       continue
@@ -59,7 +61,8 @@ def read_sounds(filename):
     filename = os.path.join(directory, sound.getAttribute('file'))
     sound_labels = list(filter(bool, sound.getAttribute('labels').split(' ')))
     name = sound.getAttribute('name') or os.path.splitext(os.path.basename(filename))[0]
-    result.append(Sound(filename, name, labels + sound_labels))
+    sound_volume = float(sound.getAttribute('volume') or '1.0') * volume
+    result.append(Sound(filename, name, labels + sound_labels, sound_volume))
   return result
 
 
@@ -153,7 +156,9 @@ def main():
       if not matches:
         print('error: could not find sound for {!r}'.format(args.play))
         return 1
-      args.play = random.choice(matches).filename
+      choice = random.choice(matches)
+      args.play = choice.filename
+      args.volume *= choice.volume
     play_sound(args.play, args.device, args.volume)
     return
 
