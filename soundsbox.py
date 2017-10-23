@@ -90,9 +90,9 @@ def list_devices():
       inputs.append((i, dev))
     if dev['maxOutputChannels'] > 0:
       outputs.append((i, dev))
-  print('Available Input Devices:')
-  for i, dev in inputs:
-    print('  #{}: {} (maxInputChannels: {})'.format(i, dev['name'], dev['maxInputChannels']))
+  #print('Available Input Devices:')
+  #for i, dev in inputs:
+  #  print('  #{}: {} (maxInputChannels: {})'.format(i, dev['name'], dev['maxInputChannels']))
   print('Available Output Devices:')
   for i, dev in outputs:
     print('  #{}: {} (maxOutputChannels: {})'.format(i, dev['name'], dev['maxOutputChannels']))
@@ -161,7 +161,6 @@ def main():
       args.volume *= choice.volume
     play_sound(args.play, args.device, args.volume)
     return
-
 
 
 if __name__ == '__main__':

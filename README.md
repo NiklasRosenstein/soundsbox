@@ -11,14 +11,10 @@ Play sounds through your microphone! (Windows)
 
 ## Usage
 
-List available input and output devices:
+List available output devices:
 
 ```
 $ python soundsbox.py -l
-Available Input Devices:
-  #0: Microsoft Sound Mapper - Input (maxInputChannels: 2)
-  #1: CABLE Output (VB-Audio Virtual  (maxInputChannels: 2)
-  #2: Microphone (USB MICROPHONE) (maxInputChannels: 2)
 Available Output Devices:
   #3: Microsoft Sound Mapper - Output (maxOutputChannels: 2)
   #4: Dell S2716DG-8 (NVIDIA High Def (maxOutputChannels: 2)
@@ -26,10 +22,10 @@ Available Output Devices:
   #6: Realtek Digital Output (Realtek (maxOutputChannels: 2)
 ```
 
-Play a sound file to one or more output devices:
+Play a sound file to one or more devices:
 
 ```
-$ python soundsbox.py -p tonsdmg.wav -d 1,5
+$ python soundsbox.py -p tonsdmg -d 4,5
 ```
 
 ---
