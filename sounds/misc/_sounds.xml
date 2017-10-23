@@ -1,5 +1,6 @@
 <sounds labels="misc">
   <sound file="badumtss.wav"/>
+  <sound file="bass.wav"/>
   <sound file="bitefaceoff.wav" labels="joke bite face"/>
   <sound file="getinhere.wav" labels="grimpatron"/>
   <sound file="gudelaune.wav" labels="laune"/>
