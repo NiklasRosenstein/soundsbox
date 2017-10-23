@@ -2,7 +2,7 @@
   <sound file="2for2deal.wav" labels="good doublekill"/>
   <sound file="cantdoit.wav" labels="bad shout cannot"/>
   <sound file="gongshow.wav" labels="bad excuse"/>
-  <sound file="imlagging.wav" labels="bad lag excuse"/>
+  <sound file="imlaggin.wav" labels="bad lag excuse"/>
   <sound file="issue.wav" labels="bad issue"/>
   <sound file="mistake.wav" labels="bad mistake"/>
   <sound file="nicenice.wav" labels="good shout nice"/>
