@@ -19,7 +19,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-l', '--list', action='store_true', help='List available input and output devices.')
 parser.add_argument('-d', '--device', help='Output device indices (comma separated).')
 parser.add_argument('-p', '--play', help='Play the specified sound file.')
-parser.add_argument('-v', '--volume', type=float, default=0.1, help='Volume of the played sound.')
+parser.add_argument('-v', '--volume', type=float, default=0.05, help='Volume of the played sound.')
+
 
 def main():
   args = parser.parse_args()
