@@ -1,0 +1,4 @@
+<sounds labels="music">
+  <sound file="cantina.mp3"/>
+  <sound file="yakety.mp3" labels="clownfiesta fiesta"/>
+</sounds>
