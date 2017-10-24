@@ -1,4 +1,7 @@
 <sounds labels="lol lolchamp">
-  <sound file="rammus_ok.wav" labels="rammus ok"/>
+  <sound file="akali_noobs.mp3" labels="akali noobs matchmaking"/>
   <sound file="kayle_wrongleague.wav" labels="kayle wrongleague league"/>
+  <sound file="lissandra_cold.mp3" labels="lissandra cold"/>
+  <sound file="rammus_ok.wav" labels="rammus ok"/>
+  <sound file="viktor_inferior.mp3" labels="viktor inferior"/>
 </sounds>

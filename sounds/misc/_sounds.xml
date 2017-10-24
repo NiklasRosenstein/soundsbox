@@ -1,11 +1,17 @@
 <sounds labels="misc">
+  <sound file="9000.mp3"/>
   <sound file="badumtss.wav"/>
   <sound file="bass.wav"/>
   <sound file="bitefaceoff.wav" labels="joke bite face"/>
   <sound file="faker.wav" labels="lol play"/>
   <sound file="getinhere.wav" labels="grimpatron"/>
   <sound file="gudelaune.wav" labels="laune"/>
+  <sound file="hallelujah.mp3"/>
+  <sound file="inception.mp3"/>
   <sound file="nomana.wav" labels="tyler tyler1 mana oom"/>
+  <sound file="pylons.mp3" labels="starcraft"/>
   <sound file="sauce.wav" labels="shaq"/>
+  <sound file="saywhatagain.mp3" labels="what"/>
+  <sound file="shindeiru.mp3" labels="nani dead"/>
   <sound file="tonsdmg.wav" labels="damage phreak"/>
 </sounds>
