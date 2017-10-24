@@ -11,6 +11,7 @@ import atexit
 import numpy as np
 import os
 import pyaudio
+import pydub
 import random
 import sys
 import wave
@@ -38,6 +39,56 @@ class Sound(object):
   def __repr__(self):
     return 'Sound(filename={!r}, name={!r}, labels={!r}, volume={!r})'\
       .format(self.filename, self.name, self.labels, self.volume)
+
+
+class SoundData(object):
+
+  @staticmethod
+  def bytes_to_array(bytes, sample_width):
+    dtype = {1: np.int8, 2: np.int16, 4: np.float32}[sample_width]
+    return np.fromstring(bytes, dtype)
+
+  @classmethod
+  def from_file(cls, filename):
+    if filename.endswith('.wav'):
+      return cls.from_wav(filename)
+    elif filename.endswith('.mp3'):
+      return cls.from_mp3(filename)
+    else:
+      raise ValueError('unsupported file format: "{}"'.format(self.filename))
+
+  @classmethod
+  def from_wav(cls, filename):
+    with wave.open(filename) as wf:
+      rate = wf.getframerate()
+      channels = wf.getnchannels()
+      width = wf.getsampwidth()
+      data = wf.readframes(wf.getnframes())
+    return cls(cls.bytes_to_array(data, width), rate, channels)
+
+  @classmethod
+  def from_mp3(cls, filename):
+    sound = pydub.AudioSegment.from_mp3(filename)
+    data = cls.bytes_to_array(sound._data, sound.sample_width)
+    return cls(data, sound.frame_rate, sound.channels)
+
+  def __init__(self, data, rate, channels):
+    assert isinstance(data, np.ndarray)
+    assert data.dtype in (np.int8, np.int16, np.float32)
+    self.data = data
+    self.rate = rate
+    self.channels = channels
+
+  @property
+  def pyaudio_format(self):
+    if self.data.dtype == np.int8:
+      return pyaudio.paInt8
+    elif self.data.dtype == np.int16:
+      return pyaudio.paInt16
+    elif self.data.dtype == np.float32:
+      return pyaudio.paFloat32
+    else:
+      raise ValueError('unexpected sound data type: {!r}'.format(self.data.dtype))
 
 
 def read_sounds(filename):
@@ -104,36 +155,22 @@ def play_sound(filename, devices, volume):
   elif isinstance(devices, str):
     devices = [None if x == '' else int(x) for x in devices.split(',')]
 
-  sound = wave.open(filename)
-  width = sound.getsampwidth()
-
-  if width == 1:
-    format = pyaudio.paInt8
-    dtype = np.int8
-  elif width == 2:
-    format = pyaudio.paInt16
-    dtype = np.int16
-  else:
-    print('error: unexpected wave sample width:', width)
-    return 1
+  sound = SoundData.from_file(filename)
 
   # Open output streams for every device specified.
   streams = []
   for device in devices:
     streams.append(audio.open(
-      format=format,
-      channels=sound.getnchannels(),
-      rate=sound.getframerate(),
+      format=sound.pyaudio_format,
+      channels=sound.channels,
+      rate=sound.rate,
       output=True,
       output_device_index=device
     ))
 
   # Write to the streams.
-  while True:
-    data = sound.readframes(2048)
-    if not data:
-      break
-    data = (np.fromstring(data, dtype) * volume).astype(dtype).tobytes()
+  for i in range(0, len(sound.data), 2048):
+    data = (sound.data[i:i+2048] * volume).astype(sound.data.dtype).tobytes()
     [x.write(data) for x in streams]
 
   [x.stop_stream() for x in streams]
