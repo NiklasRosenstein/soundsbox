@@ -8,6 +8,8 @@ Play sounds through your microphone! (Windows)
 2) Configure "CABLE Output" as your new microphone input (eg. in Discord)
 3) Configure your actual microphone to redirect into "CABLE Input"
 4) Install Python dependencies with `pip install -r requirements.txt`
+5) To play MP3 sounds, make sure [ffmpeg](http://ffmpeg.zeranoe.com/builds/)
+   is in your `PATH`
 
 ## Usage
 
